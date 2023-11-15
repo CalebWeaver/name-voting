@@ -29,7 +29,7 @@ export class SaveService {
   }
 
   public load() {
-    if (localStorage.getItem('namePrefs') != "{}") {
+    if (localStorage.getItem('namePrefs')) {
       this.nameListService.set(JSON.parse(localStorage.getItem('namePrefs'), this.reviver));
       this.nameListService.round = parseInt(localStorage.getItem('round'));
       this.nameListService.namePairings = JSON.parse(localStorage.getItem('namePairings'));

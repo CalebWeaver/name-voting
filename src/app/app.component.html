@@ -320,6 +320,6 @@
   <button *ngIf="!showResults" (click)="toggleShowResults()">+</button>
   <button *ngIf="showResults" (click)="toggleShowResults()">-</button>
   <div *ngIf="showResults">
-    <app-results [names]="names" [updateNames]="voteEvent"></app-results>
+    <app-results></app-results>
   </div>
 </div>

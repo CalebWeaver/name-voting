@@ -1,28 +1,26 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit } from '@angular/core';
 import { Name } from '../name';
+import { NameListService } from '../services/name-list.service';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit, OnChanges {
-  @Input() names: Name[];
+export class ResultsComponent implements OnInit {
   sortedNames: Name[];
-  @Input() updateNames: EventEmitter<Name[]>;
+
+  constructor(private nameListService: NameListService) {}
 
   public ngOnInit(): void {
-    this.sort();
-    this.updateNames.subscribe(this.sort());
+    this.nameListService.nameMap.subscribe(newMap => {
+      this.sort(Array.from(newMap.values()));
+    });
   }
 
-  public ngOnChanges() {
-    this.sort();
-  }
-
-  public sort() {
+  public sort(unsortedNames: Name[]) {
     this.sortedNames = [];
-    this.names.forEach(name => this.sortedNames.push(name));
+    unsortedNames.forEach(name => this.sortedNames.push(name));
     this.sortedNames.sort((a:Name, b:Name) => b.elo - a.elo);
   }
 }

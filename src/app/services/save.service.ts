@@ -10,7 +10,12 @@ import { NamePairing } from '../name-pairing';
 export class SaveService {
   nameListService: NameListService;
 
-  constructor(private roundManagerService: RoundManagerService) {}
+  constructor(private roundManagerService: RoundManagerService) {
+    let round = localStorage.getItem('round');
+    if (round == undefined) {
+      localStorage.setItem('round', '0');
+    }
+  }
 
   public setDependency(nameListService: NameListService) {
     this.nameListService = nameListService;

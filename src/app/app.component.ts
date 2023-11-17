@@ -15,9 +15,7 @@ export class AppComponent implements OnInit {
   candidateB: Name;
   showResults: boolean = false;
 
-  constructor(private nameListService: NameListService,
-    private saveService: SaveService,
-    private roundManagerService: RoundManagerService) {}
+  constructor(public nameListService: NameListService) {}
 
   ngOnInit(): void {
     this.nextMatch();
